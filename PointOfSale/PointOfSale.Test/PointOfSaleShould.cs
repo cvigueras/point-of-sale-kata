@@ -51,5 +51,13 @@ namespace PointOfSale.Test
 
             result.Should().Be("Error: barcode not found");
         }
+
+        [Test]
+        public void return_sum_prices_for_many_bar_codes()
+        {
+            var result = _pointSale.GetTotal(BarCode.Create("12345-23456"));
+
+            result.Should().Be("$19.75");
+        }
     }
 }
