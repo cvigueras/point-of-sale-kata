@@ -17,5 +17,13 @@ namespace PointOfSale.Test
 
             result.Should().Be("Error: empty barcode");
         }
+
+        [Test]
+        public void return_error_empty_bar_code_string_when_bar_code_is_null()
+        {
+            var result = PointSale.GetTotal(null);
+
+            result.Should().Be("Error: empty barcode");
+        }
     }
 }
