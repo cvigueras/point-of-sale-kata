@@ -22,6 +22,10 @@ namespace PointOfSale.Test
     {
         public static object GetTotal(string barCode)
         {
+            if (barCode == "")
+            {
+                return "Error: empty barcode";
+            }
             throw new NotImplementedException();
         }
     }
