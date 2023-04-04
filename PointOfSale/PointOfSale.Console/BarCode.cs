@@ -3,7 +3,7 @@ namespace PointOfSale.Console;
 public class BarCode
 {
     public string Value { get; }
-    private Dictionary<string, double> _barCodesPricesDictionary;
+    private readonly Dictionary<string, double> _barCodesPricesDictionary;
 
     private BarCode(string value)
     {

@@ -43,5 +43,13 @@ namespace PointOfSale.Test
 
             result.Should().Be("12,5");
         }
+
+        [Test]
+        public void return_error_bar_code_not_found_when_bar_code_is_99999()
+        {
+            var result = _pointSale.GetTotal(BarCode.Create("99999"));
+
+            result.Should().Be("Error: barcode not found");
+        }
     }
 }

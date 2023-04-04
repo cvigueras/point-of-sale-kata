@@ -4,6 +4,11 @@ public class PointSale
 {
     public string? GetTotal(BarCode barCode)
     {
-        return string.IsNullOrEmpty(barCode.Value) ? "Error: empty barcode" : barCode.GetPrice().ToString();
+        if (string.IsNullOrEmpty(barCode.Value))
+        {
+            return "Error: empty barcode";
+        }
+        return barCode.GetPrice().ToString();
+
     }
 }
