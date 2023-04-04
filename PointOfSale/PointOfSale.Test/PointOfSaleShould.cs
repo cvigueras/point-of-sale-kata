@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace PointOfSale.Test
 {
     public class PointOfSaleShould
@@ -8,9 +10,19 @@ namespace PointOfSale.Test
         }
 
         [Test]
-        public void Test1()
+        public void return_error_empty_bar_code_string_when_bar_code_is_empty()
         {
-            Assert.Pass();
+            var result = PointSale.GetTotal("");
+
+            result.Should().Be("Error: empty barcode");
+        }
+    }
+
+    public class PointSale
+    {
+        public static object GetTotal(string barCode)
+        {
+            throw new NotImplementedException();
         }
     }
 }
