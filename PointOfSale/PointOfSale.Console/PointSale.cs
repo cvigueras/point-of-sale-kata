@@ -2,22 +2,8 @@ namespace PointOfSale.Console;
 
 public class PointSale
 {
-    public static object GetTotal(string barCode)
+    public string? GetTotal(BarCode barCode)
     {
-        if (string.IsNullOrEmpty(barCode))
-        {
-            return "Error: empty barcode";
-        }
-
-        if (barCode == "12345")
-        {
-            return "$7.25";
-        }
-
-        if (barCode == "23456")
-        {
-            return "$12.50";
-        }
-        throw new NotImplementedException();
+        return string.IsNullOrEmpty(barCode.Value) ? "Error: empty barcode" : barCode.GetPrice().ToString();
     }
 }

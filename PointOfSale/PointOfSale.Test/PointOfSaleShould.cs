@@ -5,15 +5,17 @@ namespace PointOfSale.Test
 {
     public class PointOfSaleShould
     {
+        private PointSale _pointSale;
         [SetUp]
         public void Setup()
         {
+            _pointSale = new PointSale();
         }
 
         [Test]
         public void return_error_empty_bar_code_string_when_bar_code_is_empty()
         {
-            var result = PointSale.GetTotal("");
+            var result = _pointSale.GetTotal(BarCode.Create(""));
 
             result.Should().Be("Error: empty barcode");
         }
@@ -21,7 +23,7 @@ namespace PointOfSale.Test
         [Test]
         public void return_error_empty_bar_code_string_when_bar_code_is_null()
         {
-            var result = PointSale.GetTotal(null);
+            var result = _pointSale.GetTotal(BarCode.Create(null));
 
             result.Should().Be("Error: empty barcode");
         }
@@ -29,17 +31,17 @@ namespace PointOfSale.Test
         [Test]
         public void return_cost_when_bar_code_exist()
         {
-            var result = PointSale.GetTotal("12345");
+            var result = _pointSale.GetTotal(BarCode.Create("12345"));
 
-            result.Should().Be("$7.25");
+            result.Should().Be("7,25");
         }
 
         [Test]
         public void return_cost_when_bar_code_exist_with_other_bar_code()
         {
-            var result = PointSale.GetTotal("23456");
+            var result = _pointSale.GetTotal(BarCode.Create("23456"));
 
-            result.Should().Be("$12.50");
+            result.Should().Be("12,5");
         }
     }
 }
