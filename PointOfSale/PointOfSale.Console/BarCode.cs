@@ -4,7 +4,7 @@ namespace PointOfSale.Console;
 
 public class BarCode
 {
-    public string Value { get; }
+    public string Value { get; private set; }
     private readonly Dictionary<string, double> _barCodesPricesDictionary;
 
     private BarCode(string value)
@@ -24,16 +24,18 @@ public class BarCode
 
     public string? GetPrice()
     {
-        var result = Validate();
-        if (!string.IsNullOrEmpty(result))
+        if (!string.IsNullOrEmpty(Value) && Value.Contains("-"))
         {
-            return result;
+            return GetSum();
         }
+        var result = Validate();
+        return !string.IsNullOrEmpty(result) ? result : string.Concat("$", GetItemPrice().ToString(CultureInfo.InvariantCulture));
+    }
 
-        var price = _barCodesPricesDictionary
-                                    .FirstOrDefault(x => x.Key.Equals(Value)).Value
-                                    .ToString(CultureInfo.InvariantCulture);
-        return string.Concat("$", price);
+    private double GetItemPrice()
+    {
+        return _barCodesPricesDictionary
+            .FirstOrDefault(x => x.Key.Equals(Value)).Value;
     }
 
     public string? Validate()
@@ -43,11 +45,36 @@ public class BarCode
             return "Error: empty barcode";
         }
 
-        if (Value == "99999")
+        if (!ExistBarCode())
         {
             return "Error: barcode not found";
         }
 
         return string.Empty;
+    }
+
+    private bool ExistBarCode()
+    {
+        if (Value != "99999")
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public string? GetSum()
+    {
+        if (!Value.Contains("-")) return string.Empty;
+        var total = 0d;
+        var barCodes = Value.Split('-');
+        foreach (var item in barCodes)
+        {
+            Value = item;
+            if (ExistBarCode())
+            {
+                total += GetItemPrice();
+            }
+        }
+        return string.Concat("$", total.ToString(CultureInfo.InvariantCulture));
     }
 }
