@@ -8,6 +8,10 @@ public class PointSale
         {
             return "Error: empty barcode";
         }
+        if (barCode == null)
+        {
+            return "Error: empty barcode";
+        }
         throw new NotImplementedException();
     }
 }
