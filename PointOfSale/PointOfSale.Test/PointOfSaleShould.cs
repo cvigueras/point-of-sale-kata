@@ -59,5 +59,13 @@ namespace PointOfSale.Test
 
             result.Should().Be("$19.75");
         }
+
+        [Test]
+        public void return_sum_prices_for_many_bar_codes_with_not_existing_one()
+        {
+            var result = _pointSale.GetTotal(BarCode.Create("12345-23456-87654"));
+
+            result.Should().Be("$19.75");
+        }
     }
 }
