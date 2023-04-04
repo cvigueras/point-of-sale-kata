@@ -13,6 +13,11 @@ public class PointSale
         {
             return "$7.25";
         }
+
+        if (barCode == "23456")
+        {
+            return "$12.50";
+        }
         throw new NotImplementedException();
     }
 }
