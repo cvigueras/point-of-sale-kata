@@ -33,5 +33,13 @@ namespace PointOfSale.Test
 
             result.Should().Be("$7.25");
         }
+
+        [Test]
+        public void return_cost_when_bar_code_exist_with_other_bar_code()
+        {
+            var result = PointSale.GetTotal("23456");
+
+            result.Should().Be("$12.50");
+        }
     }
 }
