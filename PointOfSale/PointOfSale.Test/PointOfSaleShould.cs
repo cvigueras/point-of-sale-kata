@@ -33,7 +33,7 @@ namespace PointOfSale.Test
         {
             var result = _pointSale.GetTotal(BarCode.Create("12345"));
 
-            result.Should().Be("7.25");
+            result.Should().Be("$7.25");
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace PointOfSale.Test
         {
             var result = _pointSale.GetTotal(BarCode.Create("23456"));
 
-            result.Should().Be("12.5");
+            result.Should().Be("$12.5");
         }
 
         [Test]

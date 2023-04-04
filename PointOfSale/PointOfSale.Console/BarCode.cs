@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace PointOfSale.Console;
 
@@ -14,7 +13,6 @@ public class BarCode
         {
             {"12345",7.25d},
             {"23456",12.50d},
-
         };
         Value = value;
     }
@@ -26,9 +24,16 @@ public class BarCode
 
     public string? GetPrice()
     {
-        return string.IsNullOrEmpty(Validate())
-            ? _barCodesPricesDictionary.FirstOrDefault(x => x.Key.Equals(Value)).Value.ToString(CultureInfo.InvariantCulture)
-            : Validate();
+        var result = Validate();
+        if (!string.IsNullOrEmpty(result))
+        {
+            return result;
+        }
+
+        var price = _barCodesPricesDictionary
+                                    .FirstOrDefault(x => x.Key.Equals(Value)).Value
+                                    .ToString(CultureInfo.InvariantCulture);
+        return string.Concat("$", price);
     }
 
     public string? Validate()
