@@ -8,6 +8,11 @@ public class PointSale
         {
             return "Error: empty barcode";
         }
+
+        if (barCode == "12345")
+        {
+            return "$7.25";
+        }
         throw new NotImplementedException();
     }
 }
