@@ -2,8 +2,8 @@ namespace PointOfSale.Console;
 
 public class PointSale
 {
-    public string? GetTotal(BarCode barCode)
+    public string GetTotal(BarCodeHandler barCode)
     {
-        return barCode.GetPrice();
+        return barCode.GetTotalPrice();
     }
 }
