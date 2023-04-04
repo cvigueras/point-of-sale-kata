@@ -1,4 +1,5 @@
 using FluentAssertions;
+using PointOfSale.Console;
 
 namespace PointOfSale.Test
 {
@@ -15,18 +16,6 @@ namespace PointOfSale.Test
             var result = PointSale.GetTotal("");
 
             result.Should().Be("Error: empty barcode");
-        }
-    }
-
-    public class PointSale
-    {
-        public static object GetTotal(string barCode)
-        {
-            if (barCode == "")
-            {
-                return "Error: empty barcode";
-            }
-            throw new NotImplementedException();
         }
     }
 }
